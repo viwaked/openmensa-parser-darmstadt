@@ -1,0 +1,151 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+enum UserStatus {
+  STUDENT
+  GUEST
+}
+
+enum LocationType {
+  BISTRO
+  MENSA
+  BIERGARTEN
+  KAFFEEBAR
+}
+
+enum DishType {
+  VEGAN
+  MEATLESS
+  PORK
+  POULTRY
+  FISH
+  BEEF
+  UNKNOWN
+}
+
+enum Language {
+  DE
+  EN
+}
+
+type Coordinates {
+  latitude: Float!
+  longitude: Float!
+}
+
+type Image {
+  id: ID!
+  url: String!
+  thumbUrl: String
+}
+
+type Location {
+  id: ID!
+  name: String!
+  coordinates: Coordinates!
+  type: LocationType!
+  openingHours: String!
+  description: String!
+  image: Image!
+}
+
+interface Teaser {
+  id: ID!
+  subtitle: String
+  title: String!
+  image: Image!
+  lastUpdated: Int!
+}
+
+type InAppTeaser implements Teaser {
+  id: ID!
+  subtitle: String
+  title: String!
+  image: Image!
+  lastUpdated: Int!
+  infoTitle: String!
+  infoText: String!
+  detailTitle: String!
+  detailText: String!
+}
+
+type ExternalTeaser implements Teaser {
+  id: ID!
+  subtitle: String
+  title: String!
+  image: Image!
+  lastUpdated: Int!
+  url: String!
+}
+
+type Information {
+  id: ID!
+  title: String!
+  content: String!
+}
+
+type Feedback {
+  id: ID!
+  tasteRating: Float
+  priceRating: Float
+  message: String
+}
+
+type Dish {
+  id: ID!
+  type: DishType!
+  rating: Float!
+  ratingCount: Int!
+  dispositionPriority: Int!
+  name(language: Language!): String!
+  price(status: UserStatus!): Float!
+  image: Image
+  allergics: [String!]!
+  specificAllergics: [String!]
+  additionals: [String!]!
+  mensa_vital: Boolean!
+  bio: Boolean!
+  feedback: Feedback
+  lastUpdated: Int!
+}
+
+type IssuingOffice {
+  id: ID!
+  name: String!
+  canteenId: ID!
+}
+
+type MenuItem {
+  id: ID!
+  date: Int!
+  dish: Dish!
+  issuingOffice: IssuingOffice!
+  lastUpdated: Int!
+}
+
+input SetFeedbackInput {
+  dishId: ID!
+  tasteRating: Float!
+  priceRating: Float!
+  message: String
+}
+
+type Query {
+  locations: [Location!]!
+  teasers: [Teaser!]!
+  informations: [Information!]!
+  menuItems(
+    canteen: ID!
+    minDate: String
+    maxDate: String
+  ): [MenuItem!]!
+  menuItem(id: ID!): MenuItem
+  dishes(ids: [ID!]!): [Dish!]!
+  dish(id: ID!): Dish
+}
+
+type Mutation {
+  setFeedback(feedback: SetFeedbackInput!): Feedback!
+}

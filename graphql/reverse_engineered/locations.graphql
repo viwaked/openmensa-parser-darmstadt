@@ -1,0 +1,17 @@
+query LocationsQuery {
+  locations {
+    id
+    name
+    coordinates {
+      latitude
+      longitude
+    }
+    type
+    openingHours
+    description
+    image {
+      id
+      url
+    }
+  }
+}

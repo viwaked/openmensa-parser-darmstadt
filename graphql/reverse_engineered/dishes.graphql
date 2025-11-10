@@ -1,0 +1,27 @@
+query Dishes($ids: [ID!]!, $status: UserStatus!, $lang: Language!) {
+  dishes(ids: $ids) {
+    id
+    type
+    rating
+    ratingCount
+    name(language: $lang)
+    price(status: $status)
+    image {
+      id
+      url
+      thumbUrl
+    }
+    allergics
+    specificAllergics
+    additionals
+    mensa_vital
+    bio
+    feedback {
+      id
+      tasteRating
+      priceRating
+      message
+    }
+    lastUpdated
+  }
+}

@@ -1,0 +1,44 @@
+query MenuItems(
+  $canteenId: ID!
+  $status: UserStatus!
+  $lang: Language!
+  $minDate: String
+  $maxDate: String
+) {
+  menuItems(canteen: $canteenId, minDate: $minDate, maxDate: $maxDate) {
+    id
+    date
+    dish {
+      id
+      type
+      rating
+      ratingCount
+      dispositionPriority
+      name(language: $lang)
+      price(status: $status)
+      image {
+        id
+        url
+        thumbUrl
+      }
+      allergics
+      specificAllergics
+      additionals
+      mensa_vital
+      bio
+      feedback {
+        id
+        tasteRating
+        priceRating
+        message
+      }
+      lastUpdated
+    }
+    issuingOffice {
+      id
+      name
+      canteenId
+    }
+    lastUpdated
+  }
+}

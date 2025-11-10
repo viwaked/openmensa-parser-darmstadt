@@ -1,0 +1,37 @@
+query MenuItem($id: ID!, $status: UserStatus!, $lang: Language!) {
+  menuItem(id: $id) {
+    id
+    date
+    dish {
+      id
+      type
+      rating
+      ratingCount
+      name(language: $lang)
+      price(status: $status)
+      image {
+        id
+        url
+        thumbUrl
+      }
+      allergics
+      specificAllergics
+      additionals
+      mensa_vital
+      bio
+      feedback {
+        id
+        tasteRating
+        priceRating
+        message
+      }
+      lastUpdated
+    }
+    issuingOffice {
+      id
+      name
+      canteenId
+    }
+    lastUpdated
+  }
+}

@@ -1,0 +1,8 @@
+mutation Feedback($feedback: SetFeedbackInput!) {
+  setFeedback(feedback: $feedback) {
+    id
+    tasteRating
+    priceRating
+    message
+  }
+}
