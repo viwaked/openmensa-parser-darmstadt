@@ -79,7 +79,7 @@ pub async fn fetch_openmensa_for_range(
 
     let openmensa = openmensa::OpenMensa {
         version: "2.1".into(),
-        parser_version: Some(env!("CARGO_PKG_VERSION").into()),
+        parser_version: option_env!("CARGO_PKG_VERSION").map(|v| v.into()),
         canteen: openmensa::Canteen {
             days: grouped_items
                 .iter()
