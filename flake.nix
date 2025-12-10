@@ -37,24 +37,35 @@
           pkgs = mkPkgs system;
         in
         rec {
-          openmensa-parser-darmstadt = pkgs.rustPlatform.buildRustPackage {
-            inherit ((builtins.fromTOML (builtins.readFile ./Cargo.toml)).package) name;
-            inherit ((builtins.fromTOML (builtins.readFile ./Cargo.toml)).package) version;
+          openmensa-parser-darmstadt-server = pkgs.rustPlatform.buildRustPackage {
+            inherit ((builtins.fromTOML (builtins.readFile ./server/Cargo.toml)).package) name;
+            inherit ((builtins.fromTOML (builtins.readFile ./server/Cargo.toml)).package) version;
 
             src = pkgs.lib.cleanSource ./.;
             cargoLock.lockFile = ./Cargo.lock;
             doCheck = true;
 
-            # nativeBuildInputs = [
-            #   pkgs.pkg-config
-            # ];
+            buildAndTestSubdir = "server";
 
-            # buildInputs = [
-            #   pkgs.openssl
-            # ];
+            meta.mainProgram = "openmensa-parser-darmstadt-server";
           };
 
-          default = openmensa-parser-darmstadt;
+          openmensa-parser-darmstadt-cli = pkgs.rustPlatform.buildRustPackage {
+            inherit ((builtins.fromTOML (builtins.readFile ./cli/Cargo.toml)).package) name;
+            inherit ((builtins.fromTOML (builtins.readFile ./cli/Cargo.toml)).package) version;
+
+            src = pkgs.lib.cleanSource ./.;
+            cargoLock.lockFile = ./Cargo.lock;
+            doCheck = true;
+
+            buildAndTestSubdir = "cli";
+
+            meta.mainProgram = "openmensa-parser-darmstadt-cli";
+          };
+
+          server = openmensa-parser-darmstadt-server;
+          cli = openmensa-parser-darmstadt-cli;
+          default = cli;
         }
       );
 
