@@ -1,7 +1,7 @@
 use std::{collections::HashMap, fs::File, io::BufReader};
 
 use axum_prometheus::PrometheusMetricLayerBuilder;
-use openmensa_parser_darmstadt::{AppState, feed};
+use openmensa_parser_darmstadt_server::{AppState, feed};
 
 #[derive(Debug, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]

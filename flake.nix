@@ -45,13 +45,13 @@
             cargoLock.lockFile = ./Cargo.lock;
             doCheck = true;
 
-            nativeBuildInputs = [
-              pkgs.pkg-config
-            ];
+            # nativeBuildInputs = [
+            #   pkgs.pkg-config
+            # ];
 
-            buildInputs = [
-              pkgs.openssl
-            ];
+            # buildInputs = [
+            #   pkgs.openssl
+            # ];
           };
 
           default = openmensa-parser-darmstadt;

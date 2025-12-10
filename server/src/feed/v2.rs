@@ -5,11 +5,12 @@ use axum::{
     routing,
 };
 
-use crate::{
-    AppState,
+use openmensa_parser_darmstadt::{
     openmensa::{self, OpenMensa},
     parser::fetch_openmensa_for_range,
 };
+
+use crate::AppState;
 
 pub fn router() -> axum::Router<AppState> {
     axum::Router::new()
