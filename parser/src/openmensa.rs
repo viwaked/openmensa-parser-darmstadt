@@ -129,7 +129,7 @@ pub struct Weekday {
     pub closed: Option<bool>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Feed {
     #[serde(rename = "@name")]
     pub name: String,
@@ -147,7 +147,7 @@ pub struct Feed {
     pub schedule: Option<Schedule>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Schedule {
     #[serde(rename = "@hour")]
     pub hour: String,
