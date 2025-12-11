@@ -12,7 +12,6 @@ example config:
     "2": [ "2", "lichtwiese" ],
     "3": [ "3", "schoefferstrasse", "schöfferstraße" ],
     "4": [ "4", "dieburg" ],
-    "5": [ "5", "haardtring" ],
     "7": [ "7", "schoeffers", "schöffers" ]
   }
 }

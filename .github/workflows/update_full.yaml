@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  CANTEENS: "1 2 3 4 5 7"
+  CANTEENS: "1 2 3 4 7"
 
 jobs:
   build-and-publish:
