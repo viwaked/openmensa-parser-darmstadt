@@ -30,21 +30,21 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Set up dependencies and directories
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Install Nix
         uses: cachix/install-nix-action@v31
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v17
         with:
           name: openmensa-parser-darmstadt
           skipPush: true
       - name: Prepare site dir
         run: rm -rf site && mkdir -p site/
       - name: Restore Full Data from Cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: site/
           key: feeds-placeholder 
@@ -84,14 +84,14 @@ jobs:
           done
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: './site'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
       - name: Save Build to Cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: site/
           key: feeds-${{ github.run_id }}
